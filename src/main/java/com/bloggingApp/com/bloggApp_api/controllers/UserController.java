@@ -45,7 +45,7 @@ public class UserController {
         return new  ResponseEntity<ApiResponse> (new ApiResponse("User deleted successfully", true), HttpStatus.OK);
     }
 
-//    Get - user get
+//    Get - user get   endpoint
     @GetMapping("/")
     public ResponseEntity<List<UserDto>> getAllUsers(){
         return ResponseEntity.ok(this.userService.getAllUsers());
