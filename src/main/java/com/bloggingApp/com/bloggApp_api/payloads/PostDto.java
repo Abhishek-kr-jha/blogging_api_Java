@@ -24,6 +24,7 @@ public class PostDto {
     private CategoryDto  category;
 
     private UserDto  user;
+    private Integer postId;
 
 
 }

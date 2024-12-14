@@ -2,6 +2,7 @@ package com.bloggingApp.com.bloggApp_api.controllers;
 
 
 import com.bloggingApp.com.bloggApp_api.entities.Post;
+import com.bloggingApp.com.bloggApp_api.payloads.ApiResponse;
 import com.bloggingApp.com.bloggApp_api.payloads.PostDto;
 import com.bloggingApp.com.bloggApp_api.services.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,5 +47,36 @@ public class PostController {
 
 
     }
+//    get all post
+    @GetMapping("/posts")
+    public ResponseEntity<List<PostDto>> getAllPost(){
+        List<PostDto>allPost = this.postService.getAllPost();
+
+        return  new ResponseEntity<List<PostDto>>(allPost, HttpStatus.OK);
+    }
+
+//    get post details by id
+@GetMapping("/posts/{postId}")
+    public ResponseEntity<PostDto> getPostById(@PathVariable Integer postId){
+     PostDto postDto = this.postService.getPostById(postId);
+     return new ResponseEntity<PostDto>(postDto, HttpStatus.OK);
+    }
+//DETELE POST
+
+    @DeleteMapping("/posts/{postId}")
+    public ApiResponse deletePost(@PathVariable Integer postId) {
+        this.postService.deletePost(postId);
+        return new ApiResponse("Post is successfully deleted !!", true);
+    }
+
+//    update post
+    @PutMapping("/posts/{postId}")
+public ResponseEntity<PostDto> updatePost(@RequestBody PostDto postDto,@PathVariable Integer postId){
+       PostDto updatePost =  this.postService.updatePost(postDto,postId);
+       return new ResponseEntity<PostDto>(updatePost, HttpStatus.OK);
+
+
+}
+
 
 }
